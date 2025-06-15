@@ -1,0 +1,77 @@
+/* 思源笔记默认主题 */
+#favorites-panel{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 0px 3px 0 4px !important;
+}
+
+:not(html[data-light-theme="Savor"]) #favorites-panel li,
+:not(html[data-light-theme="Asri"]) #favorites-panel li,
+/* :not(html[data-light-theme="Dark+"]) #favorites-panel li, */
+:not(html[data-light-theme="Tsundoku"]) #favorites-panel li,
+:not(html[data-light-theme="Rem Craft"]) #favorites-panel li,
+:not(html[data-light-theme="mini-vlook"]) #favorites-panel li
+{
+    /* transform: translateX(var(--file-toggle-width)) !important; */
+    /* margin-left: var(--file-toggle-width) !important; */
+}
+
+html[data-light-theme="daylight"] #favorites-panel li
+{
+    margin-left: var(--file-toggle-width) !important;
+
+}
+
+/* Savor */
+html[data-light-theme="Savor"] #favorites-panel
+{
+    padding: 0px 0px 6px !important;
+}
+
+/*Asri*/
+html[data-light-theme="Asri"] #favorites-panel{
+    /*  不需要额外处理 */
+}
+
+/*Dark+*/
+html[data-light-theme="Dark+"] #favorites-panel{
+    padding: 0px 4px 0px 6px !important;
+    border: none !important;
+    border-bottom: 1px solid #ccc !important;
+    /* outline: var(--custom-popover-menu-outline-width) var(--custom-popover-menu-outline-style) var(--custom-popover-menu-outline-color); */
+}
+html[data-light-theme="Dark+"] #favorites-panel ul,
+html[data-light-theme="Dark+"] #favorites-panel li{
+    border: none !important;
+    outline: none !important;
+}
+/* Tsundoku */
+html[data-light-theme="Tsundoku"] #favorites-panel{
+    padding: 0px 2px 0px 4px !important;
+}
+
+/* Rem Craft */
+html[data-light-theme="Rem Craft"] #favorites-panel{
+    padding: 0px 6px  !important;
+}
+
+/* mini-vlook */
+html[data-light-theme="mini-vlook"] #favorites-panel{
+    padding-left: 18px !important;
+    border: none !important;
+    border-bottom: 1px solid #ccc !important;
+}
+/* mini-vlook 常规 */
+html[data-light-theme="mini-vlook"] #favorites-panel .favorites-ignreo-item li::before{
+    content: "";
+    width: 14px;
+    height: 28px;
+    display: inline-block;
+    position: absolute;
+    left: -16px;
+    border-radius: 5px 0px 0px 5px !important;
+    /* 旧版暂存，可以给收藏夹的条目渲染类似的左侧小“色块” */
+    /* box-shadow: -5px 0px 5px rgba(136, 136, 136, 0) inset; */
+    /* background-color: var(--ac-ye); */
+}

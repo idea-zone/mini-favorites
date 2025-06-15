@@ -1,0 +1,29 @@
+{
+  "name": "mini-favorites",
+  "version": "1.0.0",
+  "author": "lurener",
+  "url": "https://github.com/lurener/mini-favorites",
+  "displayName": {
+      "default": "mini-favorites",
+      "zh_CN": "页面收藏置顶插件"
+  },
+  "description": {
+      "default": "To Help Favorites Page in Siyuan",
+      "zh_CN": "收藏置顶页面，方便快速访问"
+  },
+  "readme": {
+      "default": "README.md",
+      "zh_CN": "README_zh_CN.md"
+  },
+  "funding": {
+    "openCollective": "",
+    "patreon": "",
+    "github": "",
+    "custom": [
+      "https://afdian.net/a/mini-vlook"
+    ]
+  },
+  "keywords": [
+    "Favorites", "收藏","置顶"
+  ]
+}

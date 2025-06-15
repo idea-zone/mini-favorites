@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面收藏夹插件</title>
+    <style>
+        /* 打印样式设置 */
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+        @media print {
+            body {
+                width: 210mm;
+                height: 297mm;
+                margin: 0;
+                padding: 0;
+                background: white;
+                font-size: 12pt;
+                line-height: 1.5;
+            }
+            .poster-container {
+                max-width: 100%;
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+                border: 1px solid #934fb8;
+            }
+            .screenshot img {
+                max-width: 100%;
+                height: auto;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+
+        /* 屏幕样式 */
+        @media screen {
+            body {
+                font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f5f7fa;
+                color: #333;
+            }
+        }
+
+        /* 通用样式 */
+        .poster-container {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            box-sizing: border-box;
+            padding-bottom: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            border-radius: 12px;
+        }
+        .plugin-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #6ff7e7 0%, #0362df 100%);
+            border-radius: 16px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .plugin-icon-inner {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .subtitle {
+            margin: 8px 0 0;
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        .content {
+            padding: 20px;
+        }
+        .feature-card {
+            background: #f9f9ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #6e48aa;
+        }
+        h2 {
+            color: #6e48aa;
+            margin-top: 0;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .feature-list {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .feature-list li {
+            margin-bottom: 6px;
+            line-height: 1.4;
+            font-size: 13px;
+        }
+        .steps {
+            background: #f0f4ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .step {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+        .step-number {
+            background: #6e48aa;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-size: 13px;
+        }
+        .footer {
+            background: #f5f7fa;
+            padding: 15px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid #eee;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .highlight {
+            background: #f0f4ff;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .screenshots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        .screenshot {
+            flex: 1;
+            min-width: 180px;
+            max-width: 200px;
+            background: #eee;
+            border-radius: 8px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .version {
+            background: #e8f4ff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+        .version h3 {
+            margin-top: 0;
+            color: #6e48aa;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+        .version ul {
+            padding-left: 18px;
+            margin: 0;
+            font-size: 12px;
+        }
+        .version li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster-container">
+        <div class="header">
+            <div class="plugin-icon">
+                <div class="plugin-icon-inner">
+                    <img width="60" height="60" src="./icon.png" alt="插件图标">
+                </div>
+            </div>
+            <h1>页面收藏置顶插件</h1>
+            <p class="subtitle">为思源笔记带来类似 Notion 的页面收藏体验</p>
+        </div>
+        
+        <div class="content">
+            <div class="feature-card">
+                <h2>🌟 核心功能</h2>
+                <ul class="feature-list">
+                    <li><strong>一键收藏</strong> - 任意笔记/文档/页面的星标收藏</li>
+                    <li><strong>聚合视图</strong> - 跨笔记本的收藏内容统一展示（实现自定义目录功能）</li>
+                    <li><strong>快速定位</strong> - 点击可以直接打开页面</li>
+                </ul>
+            </div>
+            
+            <div class="steps">
+                <h2>📦 安装指南</h2>
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>打开 Siyuan 集市，直接通过集市下载</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>或下载 <span class="highlight">package.zip</span> 格式的包，解压后放到 <span class="highlight">\data\plugins</span> 文件夹中</div>
+                </div>
+            </div>
+            
+            <div>
+                <h2>✨ 使用说明</h2>
+                <p style="font-size: 13px; margin-bottom: 8px;"><strong>添加收藏：</strong>在文档树中，右键或通过"更多"按钮，找到"插件→添加到收藏夹"</p>
+                <p style="font-size: 13px;"><strong>移除收藏：</strong>悬浮收藏页面时会出现删除按钮，点击即可移除</p>
+                
+                <div class="screenshots">
+                    <div class="screenshot">
+                        <img src="./assets/image-20250615113431-12484nn.png" alt="添加收藏界面">
+                    </div>
+                    <div class="screenshot">
+                        <img src="./assets/image-20250615113630-g5hlkrj.png" alt="收藏效果展示">
+                    </div>
+                    <div class="screenshot">
+                        <img src="./assets/image-20250615113804-6vgcfbt.png" alt="移除收藏界面">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="version">
+                <h3>🔄 更新日志 v1.0.0+20250615</h3>
+                <ul>
+                    <li>完成文档树对页面文档增加"添加到收藏"、收藏夹区域、从收藏夹删除功能</li>
+                    <li>完成在收藏夹区域直接打开页面功能</li>
+                    <li>文档操作时收藏夹区域同步变化</li>
+                    <li>适配多种流行主题</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>立即体验更高效的笔记收藏管理！</p>
+            <p>思源笔记插件市场搜索"收藏夹管理"即可下载</p>
+        </div>
+    </div>
+</body>
+</html>
