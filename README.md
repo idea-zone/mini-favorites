@@ -1,5 +1,3 @@
-# REAMDE-mini-favorites
-
 # 🔍 核心功能
 
 本插件为思源笔记带来类似Notion的收藏夹管理体验，通过蓝色图标（V代表"Valuable-有价值的"）快速访问以下功能：
